@@ -1,0 +1,17 @@
+/* Style canvas so that it scales on small screen and attempt
+   to disable filtering to maintain 'pixellated' look */
+.canvas-responsive {
+    width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+    height: auto;
+    display: block;
+
+    /* Taken from: http://stackoverflow.com/questions/7615009/disable-interpolation-when-scaling-a-canvas/11751817#11751817 */
+    image-rendering: -moz-crisp-edges; /* FF 6.0+ */
+    image-rendering: -webkit-optimize-contrast; /* Webkit */
+    /*  (Safari now, Chrome soon) */
+    image-rendering: -o-crisp-edges; /* OS X & Windows Opera (12.02+) */
+    -ms-interpolation-mode: nearest-neighbor; /* IE */
+}

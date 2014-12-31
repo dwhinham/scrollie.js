@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>HTML 5 Canvas Sinus Scroller</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+
+<div class="container">
+    <div class="page-header">
+        <h1>HTML 5 Canvas Sinus Scroller</h1>
+    </div>
+    <p>This demo demonstrates the use of a <code>&lt;canvas&gt;</code> element. The canvas provides
+        <a href="http://en.wikipedia.org/wiki/Immediate_mode_(computer_graphics)"><em>immediate-mode</em></a> graphics to web developers,
+        which means they can use it gain direct access to the client's graphics-rendering abilities. This allows them
+        to create smooth, fast graphics for games and web apps, without depending on extra browser plugins such as
+        Flash.</p>
+
+    <p>Canvas is an HTML5 technology, and so you'll need a modern browser to see the demo below. It has been tested in
+        the latest versions of <em>Safari</em>, <em>Firefox</em>, and <em>Chrome</em> as of May 2014,
+        as well as <em>Internet Explorer 9</em> and above.
+    </p>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-question-sign"> </span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" onclick="debug=!debug">
+                How does this work? (click to expand)</a>
+            </h3>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse">
+            <div class="panel-body">
+                <ul>
+                    <li>A <code>&lt;canvas&gt;</code> tag included in the document creates a target for drawing graphics in JavaScript.</li>
+                    <li>A piece of JavaScript code loads some graphics to extra off-screen canvases in other areas of memory.</li>
+                    <li>The JS code accesses the canvas in the document using the DOM, and "paints" a frame of animation by
+                    copying the off-screen graphics data onto it (coordinates etc. are changed every frame to animate the scene).</li>
+                    <li>The code tries to use a relatively new browser API called <code>window.requestAnimationFrame()</code>. This API
+                    allows the programmer to set a JS callback function to be called whenever the browser is ready to redraw the screen.
+                    If supported, it allows the animation to be locked to the client's screen refresh rate, making the animation very smooth.</li>
+                    <li>If <code>window.requestAnimationFrame()</code> is unsupported, the JS code will fallback to the traditional timer method
+                    using a shim (redraw every 16.7ms for a roughly ~60Hz refresh rate).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="well text-center">
+        <canvas id="output" width="320" height="240" class="canvas-responsive">
+            Sorry, your browser doesn't support the canvas tag.
+        </canvas>
+        <br>
+
+        <div class="btn-group">
+            <button id="startstop" class="btn btn-success" onclick="startStop();">Start/Stop</button>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-primary" onclick="setScrollSpeed(-1);">Slower</button>
+            <button id="scrollspeed" class="btn btn-default disabled" onclick="startStop();">Scroll speed: 2
+            </button>
+            <button class="btn btn-primary" onclick="setScrollSpeed(1);">Faster</button>
+        </div>
+    </div>
+
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                <span class="glyphicon glyphicon-wrench"></span>
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" onclick="debug=!debug">
+                    Debug console (click to expand and enable debug mode)
+                </a>
+            </h3>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <textarea id="console" style="width:100%; height:200px;"></textarea>
+                    </div>
+                    <div class="col-md-8">
+                        <table class="table">
+                            <tr>
+                                <th>Frame counter</th>
+                                <th>FPS</th>
+                                <th>Degrees value</th>
+                                <th>Sine value (text)</th>
+                                <th>Sine value (lissajous)</th>
+                            </tr>
+                            <tr>
+                                <td><p id="framecounter">0</p></td>
+                                <td><p id="fps">0</p></td>
+                                <td><p id="degreesvalue">0</p></td>
+                                <td><p id="sinevaluetext">0</p></td>
+                                <td><p id="sinevaluelissa">0</p></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="scrollie.js"></script>
+
+</body>
+</html>
